@@ -24,7 +24,6 @@ async function getCurrentRegistration(courseNameSelected){
     }
     const response1 = await fetch('/getCurrentRegistration', options);
     const json1 = await response1.json();
-    console.log(json1);
     return json1;
 }
 // document.body.style.backgroundImage = "url('https://picsum.photos/seed/picsum/1366/768')";
