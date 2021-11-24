@@ -294,6 +294,10 @@ function signOut(){
     functionality.classList.add('hidden');
     const showName = document.getElementById('showName');
     showName.classList.add('hidden');
+    const functionalityButton = document.getElementById('functionalityButton');
+    functionalityButton.classList.add('hidden');
+    const allCoursesOnlineForum = document.getElementById('allCoursesOnlineForum');
+    allCoursesOnlineForum.classList.add('hidden');
 }
 
 function Scheduler(){
