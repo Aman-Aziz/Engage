@@ -1,0 +1,20 @@
+[
+	{
+		"name" : "Aman Aziz",
+		"instituteID" : "2018A7PS0119G",
+		"emailID" : "f20180119@goa.bits-pilani.ac.in",
+		"courses" : [{"name":"Introductory Philosophy", "pref": false}, {"name" : "Introduction to Cognitive Neur", "pref": false}, {"name" : "LABORATORY PROJECT", "pref" : false}]
+	},
+	{
+		"name" : "Aditya Suraj Krishnan",
+		"instituteID" : "2018A7PS0098G",
+		"emailID" : "f20180098@goa.bits-pilani.ac.in",
+		"courses" : [{"name" : "Introductory Philosophy", "pref": false}, {"name": "LABORATORY PROJECT", "pref" : false}]
+	},
+	{
+		"name" : "Vishisht Agarwal",
+		"instituteID" : "2018A7PS0224G",
+		"emailID" : "f20180224@goa.bits-pilani.ac.in",
+		"courses" : [{"name" : "Introductory Philosophy", "pref": false}]
+	}
+]

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="google-signin-client_id" content="679101775279-agdgnn2j3g5e8gec3fud146gh9u56qun.apps.googleusercontent.com">
+
+        <script src = "https://apis.google.com/js/platform.js" async defer></script>
+
+    <link rel = "stylesheet" href="./style.css">
+</head>
+<body>
+    <div >
+        <div class = "g-signin2" data-onsuccess="onSignIn" id="signIn"></a></div>
+        <div id = "content"></div>
+        <button onclick = "signOut()" class = "hidden btnSignOut btnActive" id="signOut">Sign Out</button>
+        <script src= "./client.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <div class = "hidden" id ="functionality">
+            <!-- <ul class = "allFunctions" id="allFunctions"> -->
+                <button class = "btn btnActive" onclick = "Scheduler()" id = "scheduler">Choose your preference for classes </a>
+                <button class = "btn btnActive" onclick = "OnlineForum()" id = "onlineForum">Live Discussion Rooms</a>
+
+            <!-- </ul> -->
+        </div>
+        <div style="text-align:center;"><div class = "showName hidden" id = "showName"></div></div>
+        <button class="goBackBtn btnActive hidden" onClick = "goBackToChoosingFunctionality()" id = "functionalityButton">Go Back</button>
+
+        <div id = "allCourses" class = "hidden">
+            <ul class = "courseList">
+                <li>
+                    <a href="#" id="Courses">Courses &#9662;</a>
+                    <ul class="dropdown" id="myList">
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id = "allCoursesOnlineForum" class = "hidden">
+            <form action = "chat.html">
+                <label for = "course">Select Course</label>
+                <br>
+                <select name = "course" id = "course">
+
+                </select> 
+                <button type="submit" class="btn">Join Course Room</button>
+            </form>
+        </div>
+        <div class="course--hidden hidden" id = "particularCourse">
+            <div >
+                <ul class = "details" id = 'details'>
+                    <!--<script src = "./client.js"></script>-->
+                </ul>
+                <button class = "actionButton goBackBtn btnActive" onclick="goBackToChoosingCourse()">Go Back</button>
+                <button class = "actionButton btnActive" onclick="inPersonClass()">Register for in-person</button>
+                <button class = "actionButton btnActive" onclick="onlineClass()">Register for online mode</button>
+            </div>
+        </div>
+
+    </div>
+   
+</body>

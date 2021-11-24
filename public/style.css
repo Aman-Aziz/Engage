@@ -1,0 +1,240 @@
+body{
+    --color-primary: #009579;
+    --color-primary-dark: #007f67;
+    --color-secondary: #252c6a;
+    --color-goBack: #cc3333;
+    --color-success: #4bb544;
+    --border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
+    font: 500 1rem;
+    background-image: url('https://picsum.photos/2000');
+    -webkit-background-size:fill;
+    -moz-background-size: fill;
+    -o-background-size: fill;
+    background-size: fill ; 
+    background-repeat: none;
+
+}
+
+ ul{
+    font-size: x-large;
+    padding: 0;
+    list-style: none;
+    background: #d8d8d8;
+    text-align: center;
+}
+ul li{
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    line-height: 21px;
+    text-align: left;
+}
+ul li a{
+    display: block;
+    padding: 8px 25px;
+    color: #333;
+    text-decoration: none;
+}
+ul li a:hover{
+    color: #fff;
+    background: #727272;
+}
+ul li ul.dropdown{
+
+    min-width: 100%; /* Set width of the dropdown */
+    background: #f2f2f2;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+}
+ul li:hover ul.dropdown{
+    display: block;	/* Display the dropdown */
+    /* padding-left: 100px; */
+    width: 100%;
+}
+ul li ul.dropdown li{
+    display: block;
+}
+.course--hidden{
+    display: none;
+}
+
+.g-signin2{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.hidden{
+    display: none;
+}
+.goBackBtn{
+    line-height: 12px;
+    padding: 1em;
+    margin-top: 1px;
+    margin-left: 2px;
+    position:absolute;
+    top:0;
+    left:0;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    border:  none;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: var(--color-secondary);
+}
+.courseList{
+    position: absolute;
+    top: 50px;
+    width:  100%;
+    
+}
+#functionality{
+    position: absolute;
+    top: 50px;
+    width:  100%;
+    
+}
+.showName{
+    display: inline;
+    position:relative;
+    margin:0 auto;
+    clear:left;
+    height:auto;
+    z-index: 0;
+    text-align:center;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-family: 'Raleway', sans-serif;
+    border:  none;
+    color: #000000;
+    cursor: text;
+    font-size:  x-large;
+    width: 50%;
+    background: #ffffff;
+    opacity: 0.6;
+    border-radius: 5px;
+    
+}
+.btn{
+    font-family: 'Raleway', sans-serif;
+    border:  none;
+    cursor: pointer;
+    width: 100%;
+    padding: 1rem 2rem;
+    /* font-weight: bold; */
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: var(--color-primary);
+    margin-top: 10px;
+    opacity: 1;
+}
+
+.btnActive:active 
+{
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+.details{
+    position: absolute;
+    top: 75px; 
+    line-height: 12px;
+    padding: 1em;
+    font-family: 'Raleway', sans-serif;
+    border:  none;
+    background-color: rgb(43, 43, 43);
+    color: #ffffff;
+    width: 50%;
+    cursor: text;
+}
+.actionButton{
+    position: relative;
+    line-height: 12px;
+    padding: 1em;
+    font-family: 'Raleway', sans-serif;
+    border:  none;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: var(--color-primary);
+
+}
+.goBackBtn{
+    background: var(--color-secondary);
+}
+.btnSignOut{
+    line-height: 12px;
+    padding: 1em;
+    margin-top: 1px;
+    margin-right: 2px;
+    position:absolute;
+    top:0;
+    right:0;
+    font-family: 'Raleway', sans-serif;
+    border:  none;
+    cursor: pointer;
+    /*width: 100%;*/
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: var(--color-goBack);
+
+}
+#details{
+    opacity: 0.75;
+}
+.allFunctions{
+    opacity: 0;
+}
+#allCoursesOnlineForum{
+    position: absolute;
+    top: 75px;
+    font-family: Raleway;
+    font-size: x-large;
+    background: #d8d8d8;
+    width: 100%;
+    padding: 8px 25px;
+
+}
+.classList{
+    font-family: Raleway;
+    font-size: large;
+    background: #d8d8d8;
+    width: 100%;
+    padding: 8px 25px;
+    
+}
+
+label, select, option{
+    width: 350px;
+    font-size:  large;
+    font-family: Raleway;
+}
