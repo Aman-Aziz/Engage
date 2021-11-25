@@ -16,14 +16,14 @@ const { EWOULDBLOCK } = require('constants');
 
 const app = express();
 const server = http.createServer(app);
-server.listen(8000, () => console.log('listening on port 8000'));
 const io = socketio(server);
 app.use(express.static('public'));
 app.use(express.json({limit: '10mb'}));
 app.post('./server.js')
 
-var mongooseStudent = mongoose.createConnection('mongodb://127.0.0.1:27017/students');
-var mongooseCourse = mongoose.createConnection('mongodb://127.0.0.1:27017/courses');
+// server.listen(8000, () => console.log('listening on port 8000'));
+// var mongooseStudent = mongoose.createConnection('mongodb://127.0.0.1:27017/students');
+// var mongooseCourse = mongoose.createConnection('mongodb://127.0.0.1:27017/courses');
 
 
 
@@ -129,7 +129,7 @@ app.post('/getNameOfUser', (request, response)=>{
 app.post('/getCurrentRegistration', (request, response)=>{
     let emailId = request.body[0].emailId;
     let courseName = request.body[0].courseName;
-    const studentModel = mongooseStudent.model('Student', studentSchema);
+    const studentModel = mongoose.model('studentSchema', studentSchema);
     studentModel.find({emailID : emailId}, function(err, docs){
         if(!err){
             var ans;
@@ -146,7 +146,7 @@ app.post('/getCurrentRegistration', (request, response)=>{
 
 app.post('/getCourseList',  (request, response) =>{
     const doc =[];
-    const studentModel = mongooseStudent.model('Student', studentSchema)
+    const studentModel = mongoose.model('studentSchema', studentSchema);
     studentModel.find({emailID: request.body[0].emailId},  function(err, docs) {
         if (!err) {
                 for(var key in docs[0].courses){
@@ -165,7 +165,7 @@ app.post('/getCourseList',  (request, response) =>{
 
 app.post('/getCourseDetails', (request, response) =>{
 
-    const courseModel = mongooseCourse.model('Course', courseSchema)
+    const courseModel = mongoose.model('courseSchema', courseSchema)
     let courseName = request.body[0].courseName;
     courseModel.find({name: courseName},  function(err, docs){
         if(!err){
@@ -175,7 +175,7 @@ app.post('/getCourseDetails', (request, response) =>{
 
 })
 app.post('/updateStudent', (req, res)=>{
-    const studentModel = mongooseStudent.model('Student', studentSchema);
+    const studentModel = mongoose.model('studentSchema', studentSchema);
     studentModel.findOneAndUpdate({emailID: req.body[0].emailId},{courses: req.body[0].newArr}, {new: true}, (error, data)=>{
         if(error) 
             console.log(error);
@@ -189,7 +189,7 @@ app.post('/registerForOnline', (request, response)=>{
     let freeSeats = request.body[0].freeSeats;
     freeSeats = Number(freeSeats) + 1
     let emailId = request.body[0].emailId;
-    const studentModel = mongooseStudent.model('Student', studentSchema);
+    const studentModel = mongoose.model('studentSchema', studentSchema);
     let newArr = [];
 
     studentModel.find({emailID: emailId}, function(err, docs){
@@ -202,7 +202,7 @@ app.post('/registerForOnline', (request, response)=>{
             return;
         }
         newArr[objIndex].pref = false;
-        const courseModel = mongooseCourse.model('Course', courseSchema)
+        const courseModel = mongoose.model('courseSchema', courseSchema)
         courseModel.findOneAndUpdate({name: courseName}, {freeSeats: freeSeats}, {new: true}, (error, data)=>{
             if(error) 
                 console.log(error);
@@ -220,7 +220,7 @@ app.post('/registerForInPerson', (request, response) =>{
     freeSeats = Number(freeSeats) - 1
     let emailId = request.body[0].emailId;
 
-    const studentModel = mongooseStudent.model('Student', studentSchema);
+    const studentModel = mongoose.model('studentSchema', studentSchema);
     let newArr = [];
 
     studentModel.find({emailID: emailId}, function(err, docs){
@@ -233,7 +233,7 @@ app.post('/registerForInPerson', (request, response) =>{
             return;
         }
         newArr[objIndex].pref = true;
-        const courseModel = mongooseCourse.model('Course', courseSchema)
+        const courseModel = mongoose.model('courseSchema', courseSchema)
         courseModel.findOneAndUpdate({name: courseName}, {freeSeats: freeSeats}, {new: true}, (error, data)=>{
             if(error) 
                 console.log(error);
@@ -242,3 +242,19 @@ app.post('/registerForInPerson', (request, response) =>{
         });
     })
 })
+
+
+
+console.log("Starting Server ...")
+mongoose
+  .connect(
+    "mongodb+srv://admin:admin@cluster0.raaoz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    { useUnifiedTopology: true }
+  )
+  .then((result) => {
+    server.listen(8000);
+    console.log("Server Started")
+  })
+  .catch((err) => {
+    console.log(err);
+  });
