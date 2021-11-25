@@ -40,7 +40,7 @@ async function getName(){
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('/getNameOfUser', options);
+    const response = await fetch('https://engage-microsoft.herokuapp.com/getNameOfUser', options);
     const json = await response.json();
     // console.log(json[0].name + " is the name");
     username = json[0].name;

@@ -22,7 +22,7 @@ async function getCurrentRegistration(courseNameSelected){
             'Content-Type': 'application/json'
         }
     }
-    const response1 = await fetch('/getCurrentRegistration', options);
+    const response1 = await fetch('https://engage-microsoft.herokuapp.com/getCurrentRegistration', options);
     const json1 = await response1.json();
     return json1;
 }
@@ -41,7 +41,7 @@ async function getCourseDetails(courseNameSelected){
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('/getCourseDetails', options);
+    const response = await fetch('https://engage-microsoft.herokuapp.com/getCourseDetails', options);
     const json = await response.json();
 
     const currentRegistration = await getCurrentRegistration(courseNameSelected);
@@ -115,7 +115,7 @@ async function inPersonClass(){
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('/registerForInPerson', options);
+    const response = await fetch('https://engage-microsoft.herokuapp.com/registerForInPerson', options);
     const json = await response.json();
     const reload = await getCourseDetails(courseName);
     if(json=="Already registered for in-person"){
@@ -134,7 +134,7 @@ async function inPersonClass(){
                 'Content-Type': 'application/json'
             }
         }
-        const response2 = await fetch('/updateStudent', options);
+        const response2 = await fetch('https://engage-microsoft.herokuapp.com/updateStudent', options);
         const json2 = await response2.json();
         const functionalityButton = document.getElementById('functionalityButton');
         functionalityButton.classList.add('hidden');
@@ -171,7 +171,7 @@ async function onlineClass(){
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('/registerForOnline', options);
+    const response = await fetch('https://engage-microsoft.herokuapp.com/registerForOnline', options);
     const json = await response.json();
     const reload = await getCourseDetails(courseName);    
     if(json=="Already registered for online mode"){
@@ -190,7 +190,7 @@ async function onlineClass(){
                 'Content-Type': 'application/json'
             }
         }
-        const response2 = await fetch('/updateStudent', options);
+        const response2 = await fetch('https://engage-microsoft.herokuapp.com/updateStudent', options);
         const json2 = await response2.json();
         const functionalityButton = document.getElementById('functionalityButton');
         functionalityButton.classList.add('hidden');
@@ -214,7 +214,7 @@ async function getCourses(){
         }
     }
 
-    const response = await fetch('/getCourseList', options);
+    const response = await fetch('https://engage-microsoft.herokuapp.com/getCourseList', options);
     const courses = await response.json();
     return courses;
 }

@@ -16,6 +16,7 @@ const { EWOULDBLOCK } = require('constants');
 
 const app = express();
 const server = http.createServer(app);
+var port = process.env.PORT || 8000;
 const io = socketio(server);
 app.use(express.static('public'));
 app.use(express.json({limit: '10mb'}));
@@ -252,8 +253,10 @@ mongoose
     { useUnifiedTopology: true }
   )
   .then((result) => {
-    server.listen(8000);
-    console.log("Server Started")
+    server.listen(port, ()=>{
+        console.log("Server Started")
+    });
+    
   })
   .catch((err) => {
     console.log(err);
