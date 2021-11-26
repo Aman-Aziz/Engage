@@ -48,6 +48,28 @@
                 <button type="submit" class="btn">Join Course Room</button>
             </form>
         </div>
+        <div id = "register">
+            <button class = "btn btnActive register" onclick = "Register()" id = "registerNewStudent">Register </a>
+        </div>
+
+
+        <div id = "adminVerification" class = "hidden">
+            <form action="takeStudent.html" >
+              <label for="uname">Username</label>
+              <input type="text" id="uname" name="username" placeholder="Username..">
+          
+              <label for="pword">Password</label>
+              <input type="password" id="pword" name="password" placeholder="Password..">
+          
+              <button type="submit" onclick = "AdminVerification()" class = "submit">Submit</button>
+            </form>
+        </div>
+
+        
+
+
+
+
         <div class="course--hidden hidden" id = "particularCourse">
             <div >
                 <ul class = "details" id = 'details'>

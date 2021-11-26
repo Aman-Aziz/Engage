@@ -144,7 +144,6 @@ async function inPersonClass(){
 
 }
 
-
 async function onlineClass(){
     let emailId = getEmail();
     let details = document.getElementById("name").innerHTML;
@@ -251,7 +250,8 @@ async function sendCourse() {
     });
 }
 function onSignIn(googleUser){
-
+    const register = document.getElementById('register');
+    register.classList.add('hidden');
     const signIn = document.getElementById('signIn');
     signIn.classList.add('hidden');
     const signOut = document.getElementById('signOut');
@@ -274,13 +274,41 @@ async function getName(){
         return profile.getName();    
     }
 }
+function Register(){
+    const register = document.getElementById('register');
+    register.classList.add('hidden');
+    const signIn = document.getElementById('signIn');
+    signIn.classList.add('hidden');
+    const adminVerification = document.getElementById('adminVerification');
+    adminVerification.classList.remove('hidden');
+}
+function AdminVerification(){
+    const uname = document.getElementById('uname');
+    const pword = document.getElementById('pword');
+    console.log(uname.value);
+    console.log(pword.value);
+    if(uname.value=="admin" && pword.value=="admin"){
+        const adminVerification = document.getElementById('adminVerification');
+        adminVerification.classList.add('hidden');
+        //console.log(register.classList);
+        // const userEntry = document.getElementById('userEntry');
+        // userEntry.classList.remove('hidden');
+    }
+    else{
+        
+    }
+
+}
+
+
 function signOut(){
 
     // console.log(Add(1,2));
 
     gapi.auth2.getAuthInstance().signOut().then(function(){
     })
-
+    const register = document.getElementById('register');
+    register.classList.remove('hidden');
     const signIn = document.getElementById('signIn');
     signIn.classList.remove('hidden');
     const signOut = document.getElementById('signOut');

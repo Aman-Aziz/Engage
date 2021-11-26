@@ -35,7 +35,6 @@ io.on('connection', socket => {
 
     socket.on('joinRoom', ({username, room})=>{
         const user = userJoin(socket.id, username, room);
-        //console.log(username + " " + room);
         socket.join(user.room);
         //Welcome current user. To the connecting client only
         socket.emit('Message', formatMessage(name, 'Welcome to Live Discussion Room') );
@@ -115,7 +114,6 @@ const studentSchema = new mongoose.Schema(
 var studentName;
 app.post('/sendName', (request, response) =>{
     studentName = request.body[0].name;
-    // console.log(studentName);
     response.send(JSON.stringify(studentName));
 })
 app.post('/getNameOfUser', (request, response)=>{
@@ -244,7 +242,64 @@ app.post('/registerForInPerson', (request, response) =>{
     })
 })
 
+app.post('/getCourseList2',  (request, response) =>{
+    const doc =[];
+    const courseModel = mongoose.model('courseSchema', courseSchema);
+    courseModel.find({}, function(err, docs){
+        if(!err){
+            for (var i=0; i<docs.length; i++){
+                doc.push(docs[i].name);
+            }
+            response.send(doc);
+        }
+    })
+    
+});
 
+function updateDB(data){
+    const studentModel = mongoose.model('studentSchema', studentSchema);
+    arr = [];
+    const map = new Map();
+    for (var i=0; i<data.courses.length; i++){
+        if(!map.has(data.courses[i])){
+            map[data.courses[i]] = false;
+            var obj = {
+                name: data.courses[i],
+                pref: false
+            };
+            arr.push(obj);
+        }
+        
+    }
+
+   
+    let newUser = {
+        name: data.name,
+        instituteID: data.instituteID,
+        emailID: data.emailID,
+        courses: arr
+    }
+
+    return studentModel.create(newUser);
+}
+app.post('/checkIfStudentExists',  (request, response) =>{
+    var name = request.body[0].name;
+    var instituteID = request.body[0].instituteID;
+    var emailID = request.body[0].emailID;
+    const studentModel = mongoose.model('studentSchema', studentSchema);
+    studentModel.countDocuments({emailID: emailID, name: name, instituteID: instituteID}, function(err, count){
+        if(count==0){
+            response.send(JSON.stringify("OK"));
+            updateDB(request.body[0]);
+        }
+        else{
+            response.send(JSON.stringify("NOT OK"))
+        }
+    });
+    
+    
+    
+});
 
 console.log("Starting Server ...")
 mongoose
