@@ -247,7 +247,13 @@ async function sendCourse() {
             }
         });
         
+
+        
     });
+
+
+
+    
 }
 function onSignIn(googleUser){
     const register = document.getElementById('register');

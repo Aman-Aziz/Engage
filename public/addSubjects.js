@@ -49,19 +49,7 @@ async function GenerateDropdown() {
 
 
   }
-async function updateDB(data){
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type' : 'application/json'
-        }
-    }
 
-    const response = await fetch('/addStudentToDatabase', options);
-    const json = await response.json();
-    return json;
-}
 async function SubmitCourses(){
         var courses = [];
         for (var i = 0; i <x; i++){

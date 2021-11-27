@@ -19,7 +19,7 @@ const server = http.createServer(app);
 var port = process.env.PORT || 8000;
 const io = socketio(server);
 app.use(express.static('public'));
-app.use(express.json({limit: '10mb'}));
+app.use(express.json({limit: '1000mb'}));
 app.post('./server.js')
 
 // server.listen(8000, () => console.log('listening on port 8000'));
