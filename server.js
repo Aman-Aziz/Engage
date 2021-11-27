@@ -112,6 +112,16 @@ app.post('/getNameOfUser', (request, response)=>{
     response.send((data));
 })
 
+app.post('/verifyAdmin', (request, response)=>{
+    var uname = request.body[0].uname;
+    var pword = request.body[0].pword;
+    var res = "NOT OK";
+    if(uname=="admin" && pword=="admin"){
+        res = "OK";
+    }
+    response.send(JSON.stringify(res));
+})
+
 app.post('/getCurrentRegistration', (request, response)=>{
     let emailId = request.body[0].emailId;
     let courseName = request.body[0].courseName;

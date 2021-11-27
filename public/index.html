@@ -18,6 +18,7 @@
         <div class = "g-signin2" data-onsuccess="onSignIn" id="signIn"></a></div>
         <div id = "content"></div>
         <button onclick = "signOut()" class = "hidden btnSignOut btnActive" id="signOut">Sign Out</button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js" integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
         <script src= "./client.js"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -54,14 +55,30 @@
 
 
         <div id = "adminVerification" class = "hidden">
-            <form action="takeStudent.html" >
+            
               <label for="uname">Username</label>
               <input type="text" id="uname" name="username" placeholder="Username..">
           
               <label for="pword">Password</label>
               <input type="password" id="pword" name="password" placeholder="Password..">
           
-              <button type="submit" onclick = "AdminVerification()" class = "submit">Submit</button>
+              <button onclick = "AdminVerification()" class = "submit">Submit</button>
+        </div>
+
+
+        <div id = "userEntry" class = "hidden">
+            <form action="addSubjects.html" >
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Name..">
+    
+                <label for="instituteID">Institute ID</label>
+                <input type="text" id="instituteID" name="instituteID" placeholder="Institute ID..">
+    
+                <label for="emailID">Email ID</label>
+                <input type="text" id="emailID" name="emailID" placeholder="Email ID..">
+    
+               
+                <button type="submit" onclick = "SubmitStudent()" class = "submit">Submit</button>
             </form>
         </div>
 

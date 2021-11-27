@@ -285,19 +285,40 @@ function Register(){
     const adminVerification = document.getElementById('adminVerification');
     adminVerification.classList.remove('hidden');
 }
-function AdminVerification(){
+async function AdminVerification(){
     const uname = document.getElementById('uname');
     const pword = document.getElementById('pword');
-    console.log(uname.value);
-    console.log(pword.value);
-    if(uname.value=="admin" && pword.value=="admin"){
+    
+
+    const data = [
+        {
+            uname: uname.value,
+            pword: pword.value
+        }
+    ]
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+
+    const response = await fetch('/verifyAdmin', options);
+    const json = await response.json();
+
+    if(json=="OK"){
         const adminVerification = document.getElementById('adminVerification');
         adminVerification.classList.add('hidden');
-   
+        const userEntry = document.getElementById('userEntry');
+        userEntry.classList.remove('hidden');
+
     }
     else{
-        
+        alert("Wrong Username-Password combinatin");
     }
+
 
 }
 
