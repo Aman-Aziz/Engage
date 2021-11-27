@@ -1,8 +1,6 @@
-// import { Add } from './Add.js';
 function getEmail(){
     
 
-    // console.log(Add(1,2));
     var auth2 = gapi.auth2.getAuthInstance();
     if (auth2.isSignedIn.get()) {
         var profile = auth2.currentUser.get().getBasicProfile();
@@ -26,7 +24,6 @@ async function getCurrentRegistration(courseNameSelected){
     const json1 = await response1.json();
     return json1;
 }
-// document.body.style.backgroundImage = "url('https://picsum.photos/seed/picsum/1366/768')";
 async function getCourseDetails(courseNameSelected){ 
     const functionalityButton = document.getElementById('functionalityButton');
     functionalityButton.classList.add('hidden');
@@ -296,9 +293,7 @@ function AdminVerification(){
     if(uname.value=="admin" && pword.value=="admin"){
         const adminVerification = document.getElementById('adminVerification');
         adminVerification.classList.add('hidden');
-        //console.log(register.classList);
-        // const userEntry = document.getElementById('userEntry');
-        // userEntry.classList.remove('hidden');
+   
     }
     else{
         
@@ -309,7 +304,6 @@ function AdminVerification(){
 
 function signOut(){
 
-    // console.log(Add(1,2));
 
     gapi.auth2.getAuthInstance().signOut().then(function(){
     })
@@ -412,8 +406,6 @@ async function OnlineForum(){
             'Content-Type' : 'application/json'
         }
     }
-    // console.log( name);
-    // console.log(data[0].name);
     const response = await fetch ('/sendName', options);
     const json = await response.json();
     

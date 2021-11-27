@@ -10,11 +10,9 @@ const userList = document.getElementById('users');
 const {course } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 })
-// console.log(course);
-//Join chatroom
+
 var username = "";
 
-//Get room and users
 initialize();
 var room = course;
 socket.on('roomUsers', ({room, users})=>{
@@ -42,44 +40,32 @@ async function getName(){
     }
     const response = await fetch('/getNameOfUser', options);
     const json = await response.json();
-    // console.log(json[0].name + " is the name");
     username = json[0].name;
-    // console.log("This is the username client side " + username);
     return json[0].name;
 }
 async function initialize(){
     username = await getName();
-    // console.log("Got this name " + username);
     socket.emit('joinRoom', {username, room});
 }
-// var studentName = console.log(getName() + " is the name");
 
 //Message from server.
 socket.on('Message', message => {
-    // initialize();
-    // console.log(message);
     outputMessage(message);
 
 
-    //Scroll Down
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
 
 });
 
 chatForm.addEventListener('submit', (e) =>{
-    // initialize();
     e.preventDefault();
 
-    //Get message Text
     const message = e.target.elements.msg.value;
 
-    //console.log(message);
 
-    //Emitting a message to the server.
     socket.emit('chatMessage', message);
 
-    //Clear input
     e.target.elements.msg.value = ''; 
     e.target.elements.msg.focus();
 
@@ -87,7 +73,6 @@ chatForm.addEventListener('submit', (e) =>{
 
 //Output Message to DOM
 async function outputMessage(message){
-    // initialize();
 
     var studentName = await getName();
     const div = document.createElement('div');

@@ -8,10 +8,6 @@ const formatMessage = require('./utils/messages');
 const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/users');
 
 const { EWOULDBLOCK } = require('constants');
-// import express from 'express';
-// import mongoose from 'mongoose';
-// import http from 'http';
-// import socketio from 'socket.io';
 
 
 const app = express();
@@ -22,15 +18,8 @@ app.use(express.static('public'));
 app.use(express.json({limit: '1000mb'}));
 app.post('./server.js')
 
-// server.listen(8000, () => console.log('listening on port 8000'));
-// var mongooseStudent = mongoose.createConnection('mongodb://127.0.0.1:27017/students');
-// var mongooseCourse = mongoose.createConnection('mongodb://127.0.0.1:27017/courses');
-
-
-
 //Run when a client connects
 io.on('connection', socket => {
-    // console.log("New web socket connection");
     var name = "Live Discussion Room BOT";
 
     socket.on('joinRoom', ({username, room})=>{
@@ -48,8 +37,6 @@ io.on('connection', socket => {
             users: getRoomUsers(user.room)
         });
 });
-    //Broadcast to everyone
-    // io.emit();
 
     //Listen for chat message
     socket.on('chatMessage', (msg) =>{
