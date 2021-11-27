@@ -19,12 +19,11 @@ body {
 	font-size: 16px;
 	background: var(--light-color);
 	margin: 20px;
-	background-image: url('https://picsum.photos/2000');
-    -webkit-background-size:fill;
-    -moz-background-size: fill;
-    -o-background-size: fill;
-    background-size: fill ; 
-    background-repeat: none;
+	background-image: url('vector-trendy-illustration-cartoon-people-hands-using-smartphones-modern-communication-concept-arms-holding-mobile-phone-163221747.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 ul {
@@ -46,7 +45,7 @@ a {
 
 
 .chat-container {
-	max-width: 1100px;
+	max-width: 900px;
 	background: #fff;
 	margin: 30px auto;
 	overflow: hidden;

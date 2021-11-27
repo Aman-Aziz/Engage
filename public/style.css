@@ -7,12 +7,12 @@ body{
     --border-radius: 4px;
     font-family: 'Raleway', sans-serif;
     font: 500 1rem;
-    background-image: url('https://picsum.photos/2000');
-    -webkit-background-size:fill;
-    -moz-background-size: fill;
-    -o-background-size: fill;
-    background-size: fill ; 
-    background-repeat: none;
+    background-image: url('16-168437_wallpaper-books-library-shelves-lighting-library-background-wallpaper.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
 
 }
 
@@ -196,7 +196,7 @@ ul li ul.dropdown li{
     text-align:center;
     font-family: 'Raleway', sans-serif;
     border:  none;
-    color: #000000;
+    color: #ffffff;
     cursor: text;
     font-size:  x-large;
     width: 50%;
