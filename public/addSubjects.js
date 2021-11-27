@@ -22,7 +22,7 @@ async function getCourses(){
 
 async function GenerateDropdown() {
 
-    var values = ["dog", "cat", "parrot", "rabbit"];
+    var values = [];
   
     var select = document.createElement("select");
     select.name = "courses";
@@ -42,6 +42,7 @@ async function GenerateDropdown() {
     var label = document.createElement("label");
     label.innerHTML = "Choose Course: "
     label.htmlFor = "courses";  
+    label.classList.add("choose-course");
   
     document.getElementById("container").appendChild(label).appendChild(select);
     linebreak = document.createElement("br");
