@@ -220,10 +220,13 @@ app.post('/registerForInPerson', (request, response) =>{
     let newArr = [];
 
     studentModel.find({emailID: emailId}, function(err, docs){
+        var objIndex = -1;
         for(var key in docs[0].courses){
             newArr.push(docs[0].courses[key]);
         }
         var objIndex = newArr.findIndex((obj => obj.name == courseName));
+        console.log("This is the index");
+        console.log(objIndex);
         if(newArr[objIndex].pref==true){
             response.send(JSON.stringify("Already registered for in-person"));
             return;

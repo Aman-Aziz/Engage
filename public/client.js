@@ -24,6 +24,9 @@ async function getCurrentRegistration(courseNameSelected){
     const json1 = await response1.json();
     return json1;
 }
+var nameOfCourse = "";
+var seatsAvail = 0;
+
 async function getCourseDetails(courseNameSelected){ 
     const functionalityButton = document.getElementById('functionalityButton');
     functionalityButton.classList.add('hidden');
@@ -48,6 +51,8 @@ async function getCourseDetails(courseNameSelected){
     li.innerText = "Course Name: " + json[0].name;
     li.id = "name";
     list.appendChild(li);
+    //console.log(li.innerText);
+    nameOfCourse = json[0].name;
 
     li = document.createElement("li");
     li.innerText = "Course Code: " + json[0].courseCode;
@@ -68,6 +73,7 @@ async function getCourseDetails(courseNameSelected){
     li.innerText = "Seats Available: " + json[0].freeSeats;
     li.id = "freeSeats";
     list.appendChild(li);   
+    seatsAvail = json[0].freeSeats;
     
     li = document.createElement("li");
     li.innerText = "Currently Registered for: ";
@@ -84,27 +90,19 @@ async function getCourseDetails(courseNameSelected){
 
 async function inPersonClass(){
     let emailId = getEmail();
-    let details = document.getElementById("name").innerHTML;
-    let seatsAvail = document.getElementById("freeSeats").innerHTML;
-    var avail = seatsAvail.split(" ");
-    if(Number(avail[2])==0){
+    if(Number(seatsAvail)==0){
         alert("Cannot join in person class. Max Strength has reached.");
         return;
     }
-    var res = details.split(" ");
-    var courseName = "";
-    for(var i = 2; i<res.length; i++){
-        courseName+=res[i];
-        if(i!=res.length - 1)
-            courseName+=" ";
-    }
+    var courseName = nameOfCourse
 
-
+    console.log("This is the course Name: " + courseName);
     var data = [{
         courseName: courseName,
-        freeSeats: avail[2],
+        freeSeats: seatsAvail,
         emailId: emailId
     }];
+    console.log(data);
     var options = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -143,21 +141,11 @@ async function inPersonClass(){
 
 async function onlineClass(){
     let emailId = getEmail();
-    let details = document.getElementById("name").innerHTML;
-    let seatsAvail = document.getElementById("freeSeats").innerHTML;
-    var avail = seatsAvail.split(" ");
-    var res = details.split(" ");
-    var courseName = "";
-    for(var i = 2; i<res.length; i++){
-        courseName+=res[i];
-        if(i!=res.length - 1)
-            courseName+=" ";
-    }
-
-
+ 
+    var courseName = nameOfCourse;
     var data = [{
         courseName: courseName,
-        freeSeats: avail[2],
+        freeSeats: seatsAvail,
         emailId: emailId
     }];
     var options = {
