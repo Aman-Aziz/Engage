@@ -24,6 +24,11 @@ body{
     font-family: Raleway;
     font-size: x-large;
 }
+#ChatRoomsForFaculty{
+    color: #ffffff;
+
+    float: right;
+}
 .choose-course{
     color: #ffffff;
 }

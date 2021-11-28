@@ -205,6 +205,7 @@ async function goBackForFaculty(){
     document.getElementById('functionalityButton2').classList.add('hidden');
      document.getElementById('CoursesForFaculty').classList.remove('hidden');
     document.getElementById('particularCourse2').classList.add('hidden');
+    document.getElementById('ChatRoomsForFaculty').classList.remove('hidden');
     faculty();
 }
 async function facultyCourseDetails(){
@@ -391,16 +392,7 @@ async function sendCourse(isFaculty) {
 
     
 }
-async function faculty(){
-   
-    // const functionalityButton = document.getElementById('functionalityButton');
-    // functionalityButton.classList.remove('hidden');
-    const CoursesForFaculty = document.getElementById('CoursesForFaculty');
-    CoursesForFaculty.classList.remove('hidden');
-    document.getElementById('ChatRoomsForFaculty').classList.remove('hidden');
-    console.log(document.getElementById('ChatRoomsForFaculty').classList);
-    // const particularCourse = document.getElementById('particularCourse');
-    // particularCourse.classList.remove('hidden');
+async function getCoursesFaculty(){
     var emailId = getEmail();
     const data = [
         {
@@ -417,11 +409,24 @@ async function faculty(){
 
     const response = await fetch('/getCourseList2', options);
     const courses = await response.json();
+    return courses;
+}
+async function faculty(){
+   
+    // const functionalityButton = document.getElementById('functionalityButton');
+    // functionalityButton.classList.remove('hidden');
+    const CoursesForFaculty = document.getElementById('CoursesForFaculty');
+    CoursesForFaculty.classList.remove('hidden');
+    document.getElementById('ChatRoomsForFaculty').classList.remove('hidden');
+    //console.log(document.getElementById('ChatRoomsForFaculty').classList);
+    // const particularCourse = document.getElementById('particularCourse');
+    // particularCourse.classList.remove('hidden');
+    
     //console.log("this is the list");
     //console.log(courses);
 
 
-
+    const courses = await getCoursesFaculty();
     let form = document.getElementById('coursesFaculty');
     form.innerHTML = "";
     
@@ -432,6 +437,7 @@ async function faculty(){
         opt.classList.add('classList');
         form.appendChild(opt);
     })
+    const forum = await OnlineForum2();
 
 
 }
@@ -539,6 +545,8 @@ function signOut(){
 
     gapi.auth2.getAuthInstance().signOut().then(function(){
     })
+    document.getElementById('ChatRoomsForFaculty').classList.add('hidden');
+    document.getElementById('CoursesForFaculty').classList.add('hidden');
     const register = document.getElementById('register');
     register.classList.remove('hidden');
     const signIn = document.getElementById('signIn');
@@ -642,4 +650,46 @@ async function OnlineForum(){
     const json = await response.json();
     
 
+}
+
+
+
+async function OnlineForum2(){
+    //document.getElementById('functionalityButton2').classList.remove('hidden');
+
+    const ChatRoomsForFaculty = document.getElementById('ChatRoomsForFaculty');
+    ChatRoomsForFaculty.classList.remove('hidden');
+
+
+    const courses = await getCoursesFaculty();
+    let form = document.getElementById('course1');
+    form.innerHTML = "";
+    
+    courses.forEach((item) =>{
+        let opt = document.createElement('option');
+        opt.value = item;
+        opt.innerText = item;
+        opt.classList.add('classList');
+        form.appendChild(opt);
+    })
+    var name = "";
+    var auth2 = gapi.auth2.getAuthInstance();
+    if (auth2.isSignedIn.get()) {
+        var profile = auth2.currentUser.get().getBasicProfile();
+        name =  profile.getName();    
+    }
+    const data = [
+        { 
+            name: name
+        }
+    ]
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+    const response = await fetch ('/sendName', options);
+    const json = await response.json();
 }
