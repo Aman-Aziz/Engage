@@ -1,6 +1,5 @@
-function getEmail(){
-    
 
+function getEmail(){
     var auth2 = gapi.auth2.getAuthInstance();
     if (auth2.isSignedIn.get()) {
         var profile = auth2.currentUser.get().getBasicProfile();
@@ -202,10 +201,162 @@ async function getCourses(){
     const courses = await response.json();
     return courses;
 }
-async function sendCourse() {
-    
-    const courses = await getCourses();
+async function goBackForFaculty(){
+    document.getElementById('functionalityButton2').classList.add('hidden');
+     document.getElementById('CoursesForFaculty').classList.remove('hidden');
+    document.getElementById('particularCourse2').classList.add('hidden');
+    faculty();
+}
+async function facultyCourseDetails(){
+    document.getElementById('functionalityButton2').classList.remove('hidden');
+    var courseName = document.getElementById('coursesFaculty').value;
+    // console.log(courseName.value);
 
+    document.getElementById('ChatRoomsForFaculty').classList.add('hidden');
+    document.getElementById('CoursesForFaculty').classList.add('hidden');
+    document.getElementById('particularCourse2').classList.remove('hidden');
+
+    document.getElementById('details2').innerHTML = "";
+    var data =[
+        {
+            courseName: courseName
+        }
+    ];
+    //console.log(data);
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    var response = await fetch('/getCourseDetails', options);
+    var json = await response.json();
+    //console.log(json);
+
+    let list = document.getElementById("details2");
+    let li = document.createElement("li");
+    li.innerText = "Course Name: " + json[0].name;
+    li.id = "name";
+    list.appendChild(li);
+   
+
+    li = document.createElement("li");
+    li.innerText = "Course Code: " + json[0].courseCode;
+    li.id = "courseCode"
+    list.appendChild(li);
+    
+    li = document.createElement("li");
+    li.innerText = "Instructor in-charge: " + json[0].instructorInCharge;
+    li.id = "instructorInCharge";
+    list.appendChild(li);
+    
+    li = document.createElement("li");
+    li.innerText = "Maximum Seats: " + json[0].maxSeats;
+    li.id = "maxSeats";
+    list.appendChild(li);
+    
+    li = document.createElement("li");
+    li.innerText = "Seats Available: " + json[0].freeSeats;
+    li.id = "freeSeats";
+    //li.appendChild(document.createElement("br"));
+    list.appendChild(li);   
+    let li1 = document.createElement("li");
+    li1.innerText = "";
+    list.appendChild(li1);
+    // list = document.getElementById("details3");
+    li = document.createElement("li");
+    li.innerText = "Students who opted for in-person classes:-";
+    li.id = "offline";
+
+    data =[
+        {
+            courseName: courseName,
+            offline: true
+        }
+    ];
+    //console.log(data);
+    options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    //console.log(data);
+    response = await fetch('/getStudents', options);
+    json = await response.json();
+
+    // console.log("Offline")
+    // console.log(json);
+
+    if(json.length){
+        for(var i = 0; i<json.length; i++) {
+            let li2 = document.createElement("li");
+            li2.innerText = String(i+1) + ". " +json[i].name + " - " + json[i].instituteID;
+            li.appendChild(li2);
+        }
+    }
+    else{
+        let li2 = document.createElement("li");
+        li2.innerText = "NONE";
+        li.appendChild(li2);
+    }
+
+    list.appendChild(li);
+    let li2 = document.createElement("li");
+    li2.innerText = "";
+    list.appendChild(li2);
+
+    li = document.createElement("li");
+    li.innerText = "Students who opted for online classes:-";
+    li.id = "online";
+    
+
+    data =[
+        {
+            courseName: courseName,
+            offline: false
+        }
+    ];
+    //console.log(data);
+    options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    //console.log(data);
+    response = await fetch('/getStudents', options);
+    json = await response.json();
+
+    // console.log("Online")
+    // console.log(json);
+
+    if(json.length){
+        for(var i = 0; i<json.length; i++) {
+            let li2 = document.createElement("li");
+            li2.innerText = String(i+1) + ". " +json[i].name + " - " + json[i].instituteID;
+            li.appendChild(li2);
+        }
+    }
+    else{
+        let li2 = document.createElement("li");
+        li2.innerText = "NONE";
+        li.appendChild(li2);
+    }
+
+    list.appendChild(li);
+
+
+
+}
+
+async function sendCourse(isFaculty) {
+    var courses;
+    
+    courses = await getCourses();
 
     let list = document.getElementById("myList");
     list.innerHTML = "";
@@ -240,15 +391,75 @@ async function sendCourse() {
 
     
 }
-function onSignIn(googleUser){
+async function faculty(){
+   
+    // const functionalityButton = document.getElementById('functionalityButton');
+    // functionalityButton.classList.remove('hidden');
+    const CoursesForFaculty = document.getElementById('CoursesForFaculty');
+    CoursesForFaculty.classList.remove('hidden');
+    document.getElementById('ChatRoomsForFaculty').classList.remove('hidden');
+    console.log(document.getElementById('ChatRoomsForFaculty').classList);
+    // const particularCourse = document.getElementById('particularCourse');
+    // particularCourse.classList.remove('hidden');
+    var emailId = getEmail();
+    const data = [
+        {
+            
+        }
+    ]
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const response = await fetch('/getCourseList2', options);
+    const courses = await response.json();
+    //console.log("this is the list");
+    //console.log(courses);
+
+
+
+    let form = document.getElementById('coursesFaculty');
+    form.innerHTML = "";
+    
+    courses.forEach((item) =>{
+        let opt = document.createElement('option');
+        opt.value = item;
+        opt.innerText = item;
+        opt.classList.add('classList');
+        form.appendChild(opt);
+    })
+
+
+}
+async function onSignIn(googleUser){
+    var emailID = getEmail();
+    const data = [
+        {
+            emailID: emailID
+        }
+    ]
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const response = await fetch('/checkIfTeacher', options);
+    const json = await response.json();
+    
     const register = document.getElementById('register');
     register.classList.add('hidden');
     const signIn = document.getElementById('signIn');
     signIn.classList.add('hidden');
     const signOut = document.getElementById('signOut');
     signOut.classList.remove('hidden');
-    const functionality = document.getElementById('functionality');
-    functionality.classList.remove('hidden');
+
     const showName = document.getElementById('showName');
     showName.classList.remove('hidden');
     var auth2 = gapi.auth2.getAuthInstance();
@@ -256,6 +467,18 @@ function onSignIn(googleUser){
         var profile = auth2.currentUser.get().getBasicProfile();
         showName.innerHTML = "Hello, " + profile.getName() + ".";
     }
+
+    if(json){
+        const fac = await faculty();
+    }
+    else{
+        const functionality = document.getElementById('functionality');
+        functionality.classList.remove('hidden');
+    }
+
+
+
+
 
 }
 async function getName(){
@@ -345,7 +568,7 @@ function Scheduler(){
     allCourses.classList.remove('hidden');
     const particularCourse = document.getElementById('particularCourse');
     particularCourse.classList.remove('hidden');
-    sendCourse();
+    sendCourse(false);
 
 }
 

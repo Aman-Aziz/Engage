@@ -15,6 +15,15 @@ body{
 
 
 }
+#SelectCourse{
+    color: #ffffff;
+}
+#CoursesForFaculty{
+    position: absolute;
+    top: 50px;
+    font-family: Raleway;
+    font-size: x-large;
+}
 .choose-course{
     color: #ffffff;
 }
@@ -204,7 +213,6 @@ ul li ul.dropdown li{
     width: 50%;
     
 }
-
 
 .btn{
     font-family: 'Raleway', sans-serif;

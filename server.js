@@ -97,6 +97,21 @@ const studentSchema = new mongoose.Schema(
         },
     },
 )
+
+const facultySchema = new mongoose.Schema(
+    {
+        name:{
+            type: String,
+        },
+        emailID: {
+            type: String,
+        },
+        courses: {
+            type: Array,
+        },
+    },
+)
+
  
 var studentName;
 app.post('/sendName', (request, response) =>{
@@ -300,6 +315,50 @@ app.post('/checkIfStudentExists',  (request, response) =>{
     
     
 });
+app.post('/checkIfTeacher',  (request, response) =>{
+    var emailID = request.body[0].emailID;
+    //console.log(emailID);
+    const facultyModel = mongoose.model('facultySchema', facultySchema);
+    facultyModel.countDocuments({emailID: emailID}, function(err, count){
+        if(count>0){
+            //console.log("Is Teacher");
+            response.send(JSON.stringify(true));
+        }
+        else{
+            //console.log("Is Student");
+
+            response.send(JSON.stringify(false))
+        }
+    });
+    
+    
+    
+});
+
+app.post('/getStudents',  (request, response) =>{
+
+    var courseName = request.body[0].courseName;
+    var offline = request.body[0].offline;
+    const studentModel = mongoose.model('studentSchema', studentSchema);
+    studentModel.find({}, function(err, docs){
+        var arr = [];
+        for(var i = 0; i < docs.length; i++)
+        {    for(var key in docs[i].courses){
+                if(docs[i].courses[key].name==courseName && (offline==docs[i].courses[key].pref)){
+                    var obj = {};
+                    obj.name = docs[i].name;
+                    obj.instituteID = docs[i].instituteID;
+                    arr.push(obj)
+                }
+            }
+        }
+        response.send(JSON.stringify(arr));
+    });
+    
+    
+    
+});
+
 
 console.log("Starting Server ...")
 mongoose

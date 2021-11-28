@@ -29,6 +29,30 @@
         </div>
         <div class = "showName hidden" id = "showName"></div>
         <button class="goBackBtn btnActive hidden" onClick = "goBackToChoosingFunctionality()" id = "functionalityButton">Go Back</button>
+        <button class="goBackBtn btnActive hidden" onClick = "goBackForFaculty()" id = "functionalityButton2">Go Back</button>
+
+        <div id = "CoursesForFaculty" class = "hidden">
+
+            <label for = "coursesFaculty" id = "SelectCourse">Select Course</label>
+            <br>
+            <select name = "coursesFaculty" id = "coursesFaculty">
+
+            </select> 
+            <button onclick="facultyCourseDetails()" class="btn">See Roster</button>
+
+
+        </div>
+
+        <div id = "ChatRoomsForFaculty" class="hidden">
+            <!-- <form action = "chat.html">
+                <label for = "course">Select Course</label>
+                <br>
+                <select name = "course" id = "course">
+
+                </select> 
+                <button type="submit" class="btn">Join Course Room</button>
+            </form> -->
+        </div>
 
         <div id = "allCourses" class = "hidden">
             <ul class = "courseList">
@@ -83,7 +107,15 @@
         </div>
 
         
+        <div class = "course-details hidden" id = "particularCourse2">
+            <ul class = "details" id = "details2">
 
+            </ul>
+            <br>
+            <!-- <ul class = details3 id = details3>
+
+            </ul> -->
+        </div>
 
 
 
