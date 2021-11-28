@@ -1,11 +1,11 @@
 # Engage
 Project
 
-DIRECTORY STRUCTURE
+## DIRECTORY STRUCTURE
 
 ![Untitled Workspace (4)](https://user-images.githubusercontent.com/44233192/143769793-d3e4b571-ac56-49ff-81f4-f5b1ea74816f.png)
 
-NOTES:
+## NOTES:
 
 1. Only Admin can register a student. In the "Registry" option,  to get admin access. Use credentials - USERNAME: admin PASSWORD: admin. 
 2. In "Live Discussion Rooms", chat messages are not stored on a database. So, a person can only view chat messages which were sent/received during the session.
