@@ -12,6 +12,7 @@ async function getCurrentRegistration(courseNameSelected){
         courseName: courseNameSelected,
         emailId: emailId
     }];
+    var auth2 = gapi.auth2.getAuthInstance();
     const options =  {
         method: 'POST',
         body: JSON.stringify(data),
